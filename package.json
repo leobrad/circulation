@@ -2,8 +2,20 @@
   "name": "mode",
   "version": "0.0.1",
   "description": "Frontend mode project.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": "git@github.com:leobrad/mode.git",
   "author": "Leo Brad",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.20.7",
+    "@babel/core": "^7.20.7",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/register": "^7.22.5",
+    "gulp-babel": "^8.0.0",
+    "jest": "^29.6.1"
+  },
+  "dependencies": {
+    "babel-plugin-root-import": "^6.6.0",
+    "gulp": "^4.0.2"
+  }
 }
