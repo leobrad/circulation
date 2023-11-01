@@ -25,7 +25,7 @@ class Router extends WebApp {
         loading: true,
       });
     });
-    const { bindOwnRoute, } = this;
+    const { bindOwnRoutes, } = this;
     if (typeof bindOwnRoutes === 'function') {
       this.addRemoteRoutes();
     }
