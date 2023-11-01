@@ -1,12 +1,10 @@
 import handlebars from 'handlebars';
 import { minify, } from 'html-minifier';
 
-let html;
-
-export default function getHtml(title, description) {
+export default function getHtml(title, description, lang) {
   const template = handlebars.compile(`
     <!doctype html>
-    <html lang="en">
+    <html lang="{{lang}}">
     <head>
     <meta charset="utf-8" />
     <title>{{title}}</title>
@@ -19,11 +17,7 @@ export default function getHtml(title, description) {
     </body>
     </html>
   `);
-  if (html === undefined) {
-    html = minify(
-      template({ title, description, }),
-      { collapseWhitespace: true, },
-    );
-  }
-  return html;
+  return minify(
+    template({ title, description, lang, }), { collapseWhitespace: true, },
+  );
 }

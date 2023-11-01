@@ -6,19 +6,19 @@ import filterNamespace from '~/server/lib/filterNamespace';
 const time = new Date().getTime();
 let html;
 
-async function commonFunction(req, res) {
+export default async function commonHttp(req, res, options) {
   try {
     const { url, } = req;
     if (url === '/update/time') {
-      res.end(JSON.stringify({ time, }));
+      res.end(time);
     } else if (/\.(js|ttf|ico)$/.test(url)) {
       cacheOutput(req, res, restPath,
         fs.readFileSync(path.resolve('static', restPath)),
         parseInt(fs.statSync(path.resolve('static', restPath)).mtimeMs),
       );
     } else {
-      if (htmls === undefined) {
-        html = getHtml();
+      if (html === undefined) {
+        html = getHtml(title, description, lang);
       }
       cacheOutput(req, res, '*html', html, time);
     } else if (url.substring(0, 4) === '/api') {
@@ -27,7 +27,10 @@ async function commonFunction(req, res) {
           resolve(data.toString());
         });
       });
-      const response = await fetch('http://localhost:3005' + url, {
+      const {
+        location,
+      } = options;
+      const response = await fetch(location + url, {
         method: 'POST',
         body,
       });
@@ -44,7 +47,14 @@ async function commonFunction(req, res) {
       res.end(JSON.stringify(data));
     }
   } catch (e) {
-    res.writeHead(500);
-    res.end();
+    const {
+      develop,
+    } = options;
+    if (develop === true) {
+      throw e;
+    } else {
+      res.writeHead(500);
+      res.end();
+    }
   }
 }

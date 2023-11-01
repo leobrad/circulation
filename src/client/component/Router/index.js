@@ -1,9 +1,6 @@
 import React from 'react';
-import '~/client/style/index.css';
 import style from './index.module.css';
-import UpdateConfirm from '~/client/script/component/UpdateConfirm';
-import NotFound from '~/client/script/page/NotFound';
-import WebApp from '~/client/script/component/WebApp';
+import WebApp from '~/client/component/WebApp';
 
 class Router extends WebApp {
   constructor(props) {
@@ -25,44 +22,13 @@ class Router extends WebApp {
     location.onChange((location) => {
       this.setState({
         location,
-        loading: false,
+        loading: true,
       });
     });
-    emitter.on('page/', async () => {
-      const Home = await import('~/client/script/page/Home');
-      this.addRoute('/', Home.default);
-      location.to('/');
-    });
-    emitter.on('page/login', async () => {
-      const LoginOrSignIn = await import('~/client/script/page/LoginOrSignIn');
-      this.addRoute('/login', LoginOrSignIn.default);
-      location.to('/login');
-    });
-    emitter.on('page/upload', async () => {
-      const Upload = await import('~/client/script/page/Upload');
-      this.addRoute('/upload', Upload.default);
-      location.to('/upload');
-    });
-    emitter.on('page/mustknown', async () => {
-      const MustKnown = await import('~/client/script/page/MustKnown');
-      this.addRoute('/mustknown', MustKnown.default);
-      location.to('/mustknown');
-    });
-    emitter.on('page/user', async () => {
-      const User = await import('~/client/script/page/User');
-      this.addRoute('/user', User.default);
-      location.to('/user');
-    });
-    emitter.on('page/findBackPassword', async () => {
-      const FindBackPassword = await import('~/client/script/page/FindBackPassword');
-      this.addRoute('/findBackPassword', FindBackPassword.default);
-      location.to('/findBackPassword');
-    });
-    emitter.on('page/readme', async (name, version) => {
-      const Readme = await import('~/client/script/page/Readme');
-      this.addRoute('/readme', Readme.default);
-      location.to('/readme');
-    });
+    const { bindOwnRoute, } = this;
+    if (typeof bindOwnRoutes === 'function') {
+      this.addRemoteRoutes();
+    }
   }
 
   addRoute(path, component) {
@@ -73,17 +39,20 @@ class Router extends WebApp {
     return route[path];
   }
 
-  getPage(path) {
+  async getPage(path) {
     const { component, } = this;
     if (component[path] === undefined) {
       const Page = this.route[path];
-      if (Page === undefined) {
-        return <NotFound />;
-      }
-      if (Page) {
+      if (Page !== undefined) {
         component[path] = <Page />;
       } else {
-        component[path] = null;
+        this.setState({ loading: true, });
+        const { NotFound, } = this.props;
+        if (NotFound === undefined) {
+          this.props.NotFound = await import('~/client/script/page/NotFound');
+        }
+        this.setState({ loading: false, });
+        return <NotFound />;
       }
     }
     return component[path];
@@ -93,9 +62,20 @@ class Router extends WebApp {
     const { location, minize, update, loading, } = this.state;
     let router;
     if (loading === true) {
-      router = null;
+      const { Loading, } = this.props;
+      if (Loading) {
+        router = <Loading />;
+      } else {
+        router = null;
+      }
     } else {
-      router = <div id="page" className={style.page}>{this.getPage(location)}</div>;
+      const { UpdateConfirm, } = this.props;
+      const Page = this.getPage(location);
+      router =
+        <div id="page" className={style.page}>
+          <Page />
+          {update && <UpdateConfirm />}
+        </div>;
     }
     return router;
   }

@@ -1,7 +1,7 @@
 import zlib from 'zlib';
 import { pipeline, } from 'stream';
 
-const cache = {
+const output = {
   compress: {},
   raw: {},
 };
@@ -15,16 +15,16 @@ function onError(err) {
 
 function dealCompress(data, path, res) {
   if (cache.compress[path] === undefined) {
-    cache.compress[path] = data;
+    output.compress[path] = data;
   }
-  res.end(cache.compress[path]);
+  res.end(output.compress[path]);
 }
 
 function directDeal(data, path, res) {
-  if (cache.raw[path] === undefined) {
-    cache.compress[path] = data;
+  if (output.raw[path] === undefined) {
+    output.compress[path] = data;
   }
-  res.end(cache.raw[path]);
+  res.end(output.raw[path]);
 }
 
 export default function compressOutput(req, res, buffer, path) {

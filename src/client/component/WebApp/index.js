@@ -1,10 +1,7 @@
 import React from 'react';
-import checkUpdate from '~/client/script/lib/checkUpdate';
-import global from '~/client/script/obj/global';
+import checkUpdate from '~/client/lib/checkUpdate';
 
-const {
-  location,
-} = global;
+const location = new Location();
 
 class WebApp extends React.Component {
   constructor(props) {
@@ -26,8 +23,8 @@ class WebApp extends React.Component {
     const response = fetch('/update/time', {
       method: 'POST',
     });
-    const timeText = await response.text();
-    const update = parseInt(timeText) > new Date().getTime();
+    const time = await response.text();
+    const update = parseInt(time) > new Date().getTime();
     this.setState({
       update,
     });
