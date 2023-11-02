@@ -48,9 +48,9 @@ export default async function commonHttp(req, res, options) {
     }
   } catch (e) {
     const {
-      develop,
+      develope,
     } = options;
-    if (develop === true) {
+    if (develope === true) {
       throw e;
     } else {
       res.writeHead(500);
