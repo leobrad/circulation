@@ -2,14 +2,14 @@ import cacheOutput from '~/server/lib/cacheOutput';
 import formateHttpKey from '~/server/lib/formateHttpKey';
 import filterNamespace from '~/server/lib/filterNamespace';
 
-function getFontsString(fonts) {
-  return fonts.join('|');
+function getLists(list) {
+  return list.join('|');
 }
 
 class CommonHttp {
   constructor(options) {
     this.time = new Date().getTime();
-    this.regexp = new RegExp(`\.(js|${getFontsString(options.fonts)}|html|ico)$`);
+    this.regexp = new RegExp(`\.(${getLists(options.fonts.concat(['html, ico', 'js']))})$`);
   }
 
   async process(req, res) {
@@ -39,19 +39,13 @@ class CommonHttp {
         for (const k of response.headers.keys()) {
           res.setHeader(formateHttpKey(k), response.headers.get(k));
         }
-        const response1 = response.clone();
-        let data;
-        try {
-          data = await response.json();
-        } catch (error) {
-          data = await response1.text();
-        }
+        const data = await response.text();
         res.end(JSON.stringify(data));
       }
     } catch (e) {
       const {
         develope,
-      } = options;
+      } = this.options;
       if (develope === true) {
         throw e;
       } else {
