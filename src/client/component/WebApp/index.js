@@ -1,7 +1,7 @@
 import React from 'react';
+import location from '~/client/obj/location';
 import checkUpdate from '~/client/lib/checkUpdate';
 
-const location = new Location();
 
 class WebApp extends React.Component {
   constructor(props) {

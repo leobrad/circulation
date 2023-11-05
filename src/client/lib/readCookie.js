@@ -1,4 +1,4 @@
-import clearCookie from '~/client/script/lib/clearCookie';
+import clearCookie from '~/client/lib/clearCookie';
 
 export default function readCookie() {
   const cookies = {};

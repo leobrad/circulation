@@ -1,6 +1,10 @@
 import React from 'react';
 import style from './index.module.css';
 import WebApp from '~/client/component/WebApp';
+import location from '~/client/obj/location';
+import Emitter from '~/client/class/Emitter';
+
+const emitter = new Emitter();
 
 class Router extends WebApp {
   constructor(props) {
@@ -49,7 +53,7 @@ class Router extends WebApp {
         this.setState({ loading: true, });
         const { NotFound, } = this.props;
         if (NotFound === undefined) {
-          this.props.NotFound = await import('~/client/script/page/NotFound');
+          this.props.NotFound = await import('~/client/page/NotFound');
         }
         this.setState({ loading: false, });
         return <NotFound />;

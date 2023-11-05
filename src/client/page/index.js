@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './index.module.css';
-import formateLocation from '~/client/script/lib/formateLocation';
+import formateLocation from '~/client/lib/formateLocation';
 
 class NotFound extends React.Component {
   render() {
