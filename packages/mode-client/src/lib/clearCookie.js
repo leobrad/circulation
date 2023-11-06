@@ -1,4 +1,4 @@
-import readCookie from '~/client/lib/readCookie';
+import readCookie from '~/lib/readCookie';
 
 export default function clearCookie(namespaces) {
   Object.keys(namespaces).forEach((n) => {

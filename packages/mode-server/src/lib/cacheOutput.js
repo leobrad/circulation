@@ -1,6 +1,6 @@
-import compressOutput from '~/server/lib/compressOutput';
-import formateHttpDate from '~/server/lib/formateHttpDate';
-import parseDateString from '~/server/lib/parseHttpDate';
+import compressOutput from '~/lib/compressOutput';
+import formateHttpDate from '~/lib/formateHttpDate';
+import parseDateString from '~/lib/parseHttpDate';
 
 const output = {
   modify: {},

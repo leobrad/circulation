@@ -1,8 +1,8 @@
 import React from 'react';
 import style from './index.module.css';
-import WebApp from '~/client/component/WebApp';
-import location from '~/client/obj/location';
-import Emitter from '~/client/class/Emitter';
+import WebApp from '~/component/WebApp';
+import location from '~/obj/location';
+import Emitter from '~/class/Emitter';
 
 const emitter = new Emitter();
 

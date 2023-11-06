@@ -1,6 +1,6 @@
 import React from 'react';
-import location from '~/client/obj/location';
-import checkUpdate from '~/client/lib/checkUpdate';
+import location from '~/obj/location';
+import checkUpdate from '~/lib/checkUpdate';
 
 
 class WebApp extends React.Component {

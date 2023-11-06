@@ -6,6 +6,9 @@
   "repository": "git@github.com:leobrad/mode.git",
   "author": "Leo Brad",
   "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
   "devDependencies": {
     "@babel/cli": "^7.20.7",
     "@babel/core": "^7.20.7",

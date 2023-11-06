@@ -1,0 +1,9 @@
+{
+  "name": "mode-client",
+  "version": "0.0.1",
+  "description": "Frontend client mode project.",
+  "main": "dist/index.js",
+  "repository": "https://github.com/leobrad/mode",
+  "author": "Leo Brad",
+  "license": "MIT"
+}

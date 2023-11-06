@@ -1,6 +1,6 @@
-import cacheOutput from '~/server/lib/cacheOutput';
-import formateHttpKey from '~/server/lib/formateHttpKey';
-import filterNamespace from '~/server/lib/filterNamespace';
+import cacheOutput from '~/lib/cacheOutput';
+import formateHttpKey from '~/lib/formateHttpKey';
+import filterNamespace from '~/lib/filterNamespace';
 
 function getLists(list) {
   return list.join('|');
