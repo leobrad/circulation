@@ -9,7 +9,9 @@ class NotFound extends React.Component {
         <span className={style.earth}/>
         <span className={style.question}>?</span>
         Location
-        <span className={style.location}>{formateLocation(location.pathname)}</span>
+        <span className={style.location}>
+          {formateLocation(location.pathname)}
+        </span>
         don't exist.
       </div>
     );

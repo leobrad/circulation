@@ -14,4 +14,3 @@ export default function clearCookie(namespaces) {
   });
   return namespaces;
 }
-
