@@ -2,7 +2,6 @@ import React from 'react';
 import location from '~/obj/location';
 import checkUpdate from '~/lib/checkUpdate';
 
-
 class WebApp extends React.Component {
   constructor(props) {
     super(props);
