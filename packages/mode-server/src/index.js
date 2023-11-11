@@ -1,4 +1,2 @@
-import CommonHttp from '~/server/client/class/CommonHttp';
-import parseOption from '~/server/lib/parseOption';
-
-export default const { CommonHttp, parseOption, };
+export * as CommonHttp from '~/server/client/class/CommonHttp';
+export * as parseOption from '~/server/lib/parseOption';

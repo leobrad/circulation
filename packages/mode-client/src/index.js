@@ -1,8 +1,6 @@
-import Router from '~/component/Router';
-import UpdateConfirm from '~/component/UpdateConfirm';
-import WebApp from '~/component/WebApp';
-import clearCookie from '~/lib/clearCookie';
-import readCookie from '~/lib/readCookie';
-import setCookie from '~/lib/setCookie';
-
-export default const { Router, UpdateConfirm, WebApp, clearCookie, setCookie, };
+export * as Router from '~/component/Router';
+export * as UpdateConfirm from '~/component/UpdateConfirm';
+export * as WebApp from '~/component/WebApp';
+export * as clearCookie from '~/lib/clearCookie';
+export * as readCookie from '~/lib/readCookie';
+export * as setCookie from '~/lib/setCookie';
