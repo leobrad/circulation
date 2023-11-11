@@ -1,1 +1,3 @@
-export default const location = new Location();
+const location = new Location();
+
+export default location;
